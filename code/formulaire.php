@@ -1,3 +1,6 @@
+<?php require './fonctionBD.inc.php'; 
+pdo();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
