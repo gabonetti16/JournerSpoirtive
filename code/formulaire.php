@@ -21,15 +21,31 @@ pdo();
         <p>Classe:<input type="text" placeholder="IFA-P2B">
         </p>
 
-
-        <p>Premier choix:<input type="text" placeholder="Accrobranche">
+        <p>Premier choix:
+        <select id="choix1">
+            <?php
+                getActivites();
+            ?>
+        </select>
+        </p>
+        
+        <p>Deuxieme choix:
+        <select id="choix2">
+            <?php
+                getActivites();
+            ?>
+        </select>
         </p>
 
-        <p>Deuxieme choix:<input type="text" placeholder="Vélo">
+        <p>Troisieme choix:
+        <select id="choix3">
+            <?php
+                getActivites();
+            ?>
+        </select>
         </p>
+        
 
-        <p>Troisième choix:<input type="text" placeholder="Football">
-        </p>
         <input type="submit" value="Confirmer">
         <input type="submit" value="Annuler">
     </form>

@@ -13,4 +13,14 @@ function pdo() {
         
 }
 
+function getActivites(){
+    $pdo = pdo();
+    $select = $pdo->query("SELECT nomActivite FROM activite");
+    while($ligne = $select->fetch()){
+        $Activite = $ligne['nomActivite'];
+        echo "<option value=$Activite>$Activite</option>";
+    }
+    
+    }
+
 ?>
