@@ -14,7 +14,11 @@
         if(isset($_REQUEST['nom']))
     ?>
     <h1>Inscription à la Journée Sportive du CFPT</h1>
-    <a href="./administration.php">page admin</a>
+    
+    <a href="./formulaire.php">formulaire</a>
+    <a href="./administration.php">admin</a>
+    <a href="./edition.php">edit</a>
+
     <form action="#" method="POST">
         <p>Nom:<input type="text" placeholder="Yorke">
         </p>

@@ -23,6 +23,9 @@
         }
     ?>
     <a href="./formulaire.php">formulaire</a>
+    <a href="./administration.php">admin</a>
+    <a href="./edition.php">edit</a>
+
     <form method="POST" action="#">
         <p>activite:<input type="text" name="nomActivite">
         </p>
