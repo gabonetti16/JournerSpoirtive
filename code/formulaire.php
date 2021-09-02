@@ -1,4 +1,14 @@
-<?php require './fonctionBD.inc.php'; 
+<?php 
+/*
+nom:Bonetti
+prenom:Gabriel
+classe:I.DA-P3B
+date:02.02.2021
+projet:faire un site pour un journee sportive
+but:revision php
+*/
+
+    require './fonctionBD.inc.php'; 
     pdo();
 ?>
 <!DOCTYPE html>
@@ -32,6 +42,7 @@
         <p>Premier choix:
         <select id="choix1">
             <?php
+                //ajout les activiter dans la liste déroulante
                 getActivites();
             ?>
         </select>
@@ -40,6 +51,7 @@
         <p>Deuxieme choix:
         <select id="choix2">
             <?php
+                //ajout les activiter dans la liste déroulante
                 getActivites();
             ?>
         </select>
@@ -48,6 +60,7 @@
         <p>Troisieme choix:
         <select id="choix3">
             <?php
+                //ajout les activiter dans la liste déroulante
                 getActivites();
             ?>
         </select>

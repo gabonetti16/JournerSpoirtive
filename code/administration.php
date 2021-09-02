@@ -1,4 +1,15 @@
-<?php require './fonctionBD.inc.php'; 
+<?php 
+/*
+nom:Bonetti
+prenom:Gabriel
+classe:I.DA-P3B
+date:02.02.2021
+projet:faire un site pour un journee sportive
+but:revision php
+*/
+    
+    
+    require './fonctionBD.inc.php'; 
     pdo();
 ?>
 <!DOCTYPE html>
@@ -10,12 +21,14 @@
 <body>
     <h1>Page admin</h1>
     <?php
+    //quand on appuye sur le boutton valider ajoute une classe
         if(isset($_REQUEST['nomClasse']))
         {
             $classe = $_REQUEST['nomClasse'];
             implemntClasse($classe);
         }
 
+    //quand on appuye sur le boutton valider ajoute une activiter
         if(isset($_REQUEST['nomActivite']))
         {
             $nomActivite = $_REQUEST['nomActivite'];
