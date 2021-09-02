@@ -21,6 +21,22 @@ function getActivites(){
         echo "<option value=$Activite>$Activite</option>";
     }
     
+}
+
+function implemntClasse($classe){
+    $pdo = pdo();
+    if($classe != "")
+    {
+        $insertion = $pdo->exec("INSERT INTO classe (nomClasse) VALUES ('$classe')");
     }
+}
+
+function implemntActivite($nomActivite){
+    $pdo = pdo();
+    if($nomActivite != "")
+    {
+        $insertion = $pdo->exec("INSERT INTO activite (nomActivite) VALUES ('$nomActivite')");
+    }
+}
 
 ?>

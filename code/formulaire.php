@@ -1,5 +1,5 @@
 <?php require './fonctionBD.inc.php'; 
-pdo();
+    pdo();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,11 @@ pdo();
 </head>
 
 <body>
+    <?php
+        if(isset($_REQUEST['nom']))
+    ?>
     <h1>Inscription à la Journée Sportive du CFPT</h1>
+    <a href="./administration.php">page admin</a>
     <form action="#" method="POST">
         <p>Nom:<input type="text" placeholder="Yorke">
         </p>
