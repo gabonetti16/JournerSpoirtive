@@ -10,7 +10,7 @@ but:revision php
 
 //link a la page inc
     require './fonctionBD.inc.php'; 
-    pdo();
+    getConnexion();
     //demare la session
     session_start();
 ?>

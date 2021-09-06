@@ -10,7 +10,7 @@ but:revision php
     
     
     require './fonctionBD.inc.php'; 
-    pdo();
+    getConnexion();
 ?>
 <!DOCTYPE html>
 <html lang="en">

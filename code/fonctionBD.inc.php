@@ -9,6 +9,31 @@ but:revision php
 */
 
 //fonction de conection
+
+DEFINE('DB_HOST',"localhost"); // CHEMIN D'ADRESE
+DEFINE('DB_NAME',"journeesportive"); //nom de la base de donnée
+DEFINE('DB_USER',"root");//nom de l'utilisateur
+DEFINE('DB_PASS',"");//MDP de la base de donnée
+function getConnexion(){
+
+    static $dbh = null;
+
+    if ($dbh === null) {
+        try{
+     $connectionString = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . '';
+     $dbh = new PDO($connectionString, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+     $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    }catch (PDOException $e){
+    echo("<p> Erreur: ".$e->getMessage());
+
+
+    die();
+}
+}
+
+    return $dbh;
+}
+/*
 function pdo() {
     try{
         //se conecter sur sql avec le compte admin
@@ -24,22 +49,36 @@ function pdo() {
     }
         
 }
-
+*/
 //inseration des activiter dans la liste déroulante
 function getActivites(){
-    $pdo = pdo();
+    $pdo = getConnexion();
     //slection tout les nom des activiter
     $select = $pdo->query("SELECT nomActivite FROM activite");
     //ajoute les activiter dans la lisrte
     while($ligne = $select->fetch()){
         $Activite = $ligne['nomActivite'];
-        echo "<option value=$Activite>$Activite</option>";
+        $idActivite = $ligne['idActivite'];
+        echo "<option value=$idActivite>$Activite</option>";
     }
     
 }
+
+function getClasse(){
+    $pdo = getConnexion();
+    //slection tout les nom des activiter
+    $select = $pdo->query("SELECT * FROM classe");
+    //ajoute les activiter dans la lisrte
+    while($ligne = $select->fetch()){
+        $Classe = $ligne['nomClasse'];
+        $idClasse = $ligne['idClasse'];
+        echo "<option value=$idClasse>$Classe</option>";
+    }
+}
+
 //ajout de classe dans la base de donner
 function implemntClasse($classe){
-    $pdo = pdo();
+    $pdo = getConnexion();
     //vérifie si la variable est vide
     if($classe != "")
     {
@@ -48,7 +87,7 @@ function implemntClasse($classe){
 }
 //ajout d'activiter dans la base de donner
 function implemntActivite($nomActivite){
-    $pdo = pdo();
+    $pdo = getConnexion();
     //vérifie si la variable est vide
     if($nomActivite != "")
     {
@@ -57,7 +96,7 @@ function implemntActivite($nomActivite){
 }
 //affiche les activité dans la page d'édite
 function affichageActivite(){
-    $pdo = pdo();
+    $pdo = getConnexion();
     //selection tout les nom activiter et leurs id
     $select = $pdo->query("SELECT nomActivite, idActivite FROM activite");
     
@@ -70,7 +109,7 @@ function affichageActivite(){
 }
 //fonction pour changer le nom de l'activiter
 function editActivite($nouveauNomA){
-    $pdo=pdo();
+    $pdo=getConnexion();
     $ancienNomA = $_SESSION['ancienNomA'];
     if($nouveauNomA != "")
     {
@@ -79,7 +118,7 @@ function editActivite($nouveauNomA){
 }
 //affiche les classe dans la page d'édite
 function affichageClasse(){
-    $pdo = pdo();
+    $pdo = getConnexion();
     //selection tout les nom de classe et leurs id
     $select = $pdo->query("SELECT nomClasse, idClasse FROM classe");
     
@@ -92,7 +131,7 @@ function affichageClasse(){
 }
 //fonction pour changer le nom de la classe
 function editClasse($nouveauNomC){
-    $pdo=pdo();
+    $pdo=getConnexion();
     $ancienNomC = $_SESSION['ancienNomC'];
     if($nouveauNomC != "")
     {
@@ -102,16 +141,29 @@ function editClasse($nouveauNomC){
 
 //suprimer une activiter selectioner
 function suprimerActivite(){
-    $pdo=pdo();
+    $pdo=getConnexion();
     $ancienNomA = $_SESSION['ancienNomA'];
-    $suppresion = $pdo ->exec("DELETE  from activite where idActivite = '$ancienNomA';");
+    $suppresion = $pdo ->exec("DELETE  from activite WHERE idActivite = '$ancienNomA';");
 }
 
 //suprimer une classe selectioner
 function suprimerClasse(){
-    $pdo=pdo();
+    $pdo=getConnexion();
     $ancienNomC = $_SESSION['ancienNomC'];
-    $suppresion = $pdo ->exec("DELETE  from classe where idClasse = '$ancienNomC';");
+    $suppresion = $pdo ->exec("DELETE  from classe WHERE idClasse = '$ancienNomC';");
+}
+function ajoutereleve($nomEleve, $prenomEleve, $idClasse){
+    $pdo=getConnexion();
+    $insertion = $pdo->exec("INSERT INTO eleve (nom, prenom, idClasse) VALUES ('$nomEleve', '$prenomEleve', $idClasse)");
+        $idEleve = $pdo->lastInsertId();
+        return $idEleve;
+}
+
+function inscription($idEleve, $idActivite, $noPref){
+    $pdo=getConnexion();
+    $requete = "INSERT INTO inscrire (idActivite, idEleve, ordrePref) VALUES ($idActivite, $idEleve, $noPref)";
+    $inscription1 = $pdo->prepare($requete);
+    $inscription1->execute();
 }
 
 ?>
